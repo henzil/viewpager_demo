@@ -8,9 +8,18 @@
         android:id="@+id/item_text"
         android:layout_width="150px"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
         android:gravity="center"
         android:singleLine="true"
-        android:ellipsize="end"
-        android:text="1" />
+        android:text="1"
+        android:layout_gravity="center_vertical" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="fill_parent"
+        android:layout_height="4dp"
+        android:background="#FF0000"
+        android:layout_gravity="bottom"
+        android:visibility="gone" />
 
 </LinearLayout>
