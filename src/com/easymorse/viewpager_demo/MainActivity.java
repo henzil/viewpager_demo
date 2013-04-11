@@ -6,21 +6,19 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
-import android.util.TypedValue;
 
 public class MainActivity extends Activity {
 
 	private ViewPager viewPager;
 	
-	private PagerTabStrip pagetab;
-	
 	private List<Map<?, ?>> list = new ArrayList<Map<?, ?>>();
 	
 	private MyViewPagerAdapter adapter;
+
+	
+	private MyHorizontalScrollView scrollView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,17 +29,22 @@ public class MainActivity extends Activity {
 	}
 	
 	private void initView(){
+		scrollView = (MyHorizontalScrollView) findViewById(R.id.scrollView);
 		viewPager = (ViewPager) findViewById(R.id.viewpager);
-		pagetab = (PagerTabStrip) findViewById(R.id.pagetab);
 		adapter = new MyViewPagerAdapter(this);
 		viewPager.setAdapter(adapter);
 		adapter.setData(list);
-		pagetab.setTabIndicatorColor(Color.BLUE);  // title下横线颜色值。
-		pagetab.setDrawFullUnderline(false); //不显示整条横线。
-		pagetab.setBackgroundColor(Color.RED); //背景
-//		pagetab.setTextSpacing(10); //
-		pagetab.setTextColor(Color.YELLOW);
-		pagetab.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);//设置字体大小。
+		
+		viewPager.setCurrentItem(0);
+		
+		scrollView.setViewPager(viewPager);
+		scrollView.setAnim(true);
+		List<String> tits = new ArrayList<String>();
+		for(Map<?, ?> map : list){
+			tits.add(map.get("name").toString());
+		}
+		scrollView.setAllTitle(tits);
+		
 	}
 	
 	private void initData() {
@@ -70,5 +73,8 @@ public class MainActivity extends Activity {
 		map.put("name", "5");
 		list.add(map);
 	}
+	
+	
+	
 
 }
